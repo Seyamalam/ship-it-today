@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Touhidul Alam Seyam — Ship It Today · $100 Flat</title>
+<meta name="description" content="Next.js, TypeScript and Cloudflare fixes shipped today. One flat $100 sprint, delivered in 12 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#131412;--panel:#1A1C19;--ink:#EDEBE4;--muted:#B7B9AD;--line:#2B2D28;--accent:#E85D2A;--accent-ink:#131412;--radius:10px}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(19,20,18,.92);backdrop-filter:blur(8px);z-index:10}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+  .brand{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;letter-spacing:.02em}
+  .brand span{color:var(--accent)}
+  .nav nav{display:flex;gap:22px;font-family:"IBM Plex Mono",monospace;font-size:13px}
+  .nav nav a{text-decoration:none;color:var(--muted)}
+  .nav nav a:hover{color:var(--ink)}
+  .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;padding:12px 22px;border-radius:6px;border:1px solid var(--accent);cursor:pointer;font-size:15px}
+  .btn:hover{background:#F06A35}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--muted)}
+  .hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
+  .hero h1{font-family:Fraunces,serif;font-weight:900;font-size:clamp(40px,6.5vw,68px);line-height:1.02;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero p.lede{margin-top:22px;font-size:19px;color:var(--muted);max-width:56ch}
+  .hero-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .count{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);border:1px solid var(--line);padding:11px 14px;border-radius:6px}
+  .count strong{color:var(--ink)}
+  .proof{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+  .proof div{padding:22px 24px;border-right:1px solid var(--line)}
+  .proof div:last-child{border-right:0}
+  .proof b{display:block;font-family:Fraunces,serif;font-size:30px;font-weight:900}
+  .proof span{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  h2{font-family:Fraunces,serif;font-weight:900;font-size:36px;line-height:1.1;margin-bottom:12px}
+  .sub{color:var(--muted);max-width:60ch;margin-bottom:36px}
+  .offer{display:grid;grid-template-columns:64px 1fr auto;gap:20px;padding:28px 0;border-top:1px solid var(--line);align-items:start}
+  .offer:last-child{border-bottom:1px solid var(--line)}
+  .num{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:600;padding-top:4px}
+  .offer h3{font-size:20px;margin-bottom:6px}
+  .offer p{color:var(--muted);max-width:52ch;font-size:15px}
+  .offer ul{margin:12px 0 0 18px;color:var(--muted);font-size:14px}
+  .price{text-align:right}
+  .price b{font-family:Fraunces,serif;font-size:32px;font-weight:900;display:block}
+  .price span{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+  .price .btn{margin-top:12px;padding:9px 16px;font-size:14px}
+  .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;border:1px solid var(--accent);color:var(--accent);padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:2px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .step{padding:24px;border-right:1px solid var(--line);background:var(--panel)}
+  .step:last-child{border-right:0}
+  .step b{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-size:13px;display:block;margin-bottom:10px}
+  .step h4{margin-bottom:6px;font-size:16px}
+  .step p{color:var(--muted);font-size:14px}
+  .work{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .job{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--panel)}
+  .job h4{font-size:17px;margin-bottom:6px}
+  .job p{color:var(--muted);font-size:14px;margin-bottom:12px}
+  .job a{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);text-decoration:none}
+  .job a:hover{text-decoration:underline}
+  select,input,textarea{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font:inherit;font-size:15px;margin-top:6px}
+  label{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);display:block;margin-bottom:16px}
+  .order{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .total{font-family:Fraunces,serif;font-size:44px;font-weight:900}
+  details{border-top:1px solid var(--line);padding:18px 0}
+  details:last-child{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;font-weight:600}
+  details p{color:var(--muted);margin-top:8px;font-size:15px;max-width:65ch}
+  footer{padding:40px 0 56px;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .mono{font-family:"IBM Plex Mono",monospace;font-size:13px}
+  @media(max-width:760px){.proof{grid-template-columns:1fr 1fr}.proof div{border-bottom:1px solid var(--line)}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.work,.order{grid-template-columns:1fr}.offer{grid-template-columns:40px 1fr}.price{grid-column:2;text-align:left}.nav nav{display:none}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand">SEYAM<span>.</span>DEV — SHIP IT TODAY</div>
+  <nav><a href="#offers">Offers</a><a href="#work">Work</a><a href="#order">Book</a><a href="#faq">FAQ</a></nav>
+  <a class="btn" href="#order" style="padding:9px 16px;font-size:14px">Book $100 sprint</a>
+</div></header>
+
+<div class="wrap hero">
+  <h1>Your stuck build, <em>shipped today.</em></h1>
+  <p class="lede">I'm Touhidul Alam Seyam — software engineer at Agentic Institute, 3× hackathon champion, 10 published papers, 197 public repos. For the next 12 hours I'm taking <strong style="color:var(--ink)">one flat-$100 sprint</strong>: you bring the bug, page, or feature — I deliver working, deployed code today.</p>
+  <div class="hero-cta">
+    <a class="btn" href="#order">Claim the $100 sprint</a>
+    <a class="btn ghost" href="#work">See proof of work</a>
+    <span class="count">Sprint window closes in <strong id="countdown">—</strong></span>
+  </div>
+</div>
+
+<div class="wrap"><div class="proof" style="border-left:1px solid var(--line);border-right:1px solid var(--line)">
+  <div><b>197</b><span>PUBLIC REPOS</span></div>
+  <div><b>10</b><span>PEER-REVIEWED PAPERS</span></div>
+  <div><b>3×</b><span>HACKATHON CHAMPION</span></div>
+  <div><b>12h</b><span>DELIVERY WINDOW</span></div>
+</div></div>
+
+<section id="offers"><div class="wrap">
+  <h2>Three ways to spend $100. One gets you to goal today.</h2>
+  <p class="sub">Fixed price, paid upfront via payment link, delivered today with a live demo link and the source code. No hourly billing, no scope creep calls.</p>
+
+  <div class="offer">
+    <div class="num">/ 01</div>
+    <div><h3>Bug-Fix Sprint <span class="tag">FASTEST TO $100</span></h3>
+      <p>That Next.js / TypeScript / Cloudflare error blocking your launch. I reproduce it, fix the root cause, and deploy the fix.</p>
+      <ul><li>One blocking bug or build failure, fixed and deployed</li><li>Written root-cause note so it does not come back</li><li>Delivered today, with before/after demo</li></ul></div>
+    <div class="price"><b>$100</b><span>FLAT · TODAY</span><br><a class="btn" href="#order" data-pick="Bug-Fix Sprint — $100">Book this</a></div>
+  </div>
+
+  <div class="offer">
+    <div class="num">/ 02</div>
+    <div><h3>Landing Page in a Day</h3>
+      <p>A fast, credible one-page site for your product, event, or business — copy polish, mobile layout, contact/booking CTA, deployed live.</p>
+      <ul><li>One page, your branding, deployed to Vercel/Cloudflare</li><li>Contact form or payment/booking button wired up</li><li>This very page is a live sample of the work</li></ul></div>
+    <div class="price"><b>$100</b><span>FLAT · TODAY</span><br><a class="btn" href="#order" data-pick="Landing Page in a Day — $100">Book this</a></div>
+  </div>
+
+  <div class="offer">
+    <div class="num">/ 03</div>
+    <div><h3>API / Agent Feature Sprint</h3>
+      <p>One scoped backend feature: a Hono/FastAPI endpoint, a Cloudflare Worker, D1/R2 wiring, or a small AI-agent workflow — tested and merged.</p>
+      <ul><li>One endpoint or workflow, with tests</li><li>Runs on Cloudflare Workers, Bun, or Node</li><li>Short Loom-style walkthrough of what shipped</li></ul></div>
+    <div class="price"><b>$100</b><span>FLAT · TODAY</span><br><a class="btn" href="#order" data-pick="API / Agent Feature Sprint — $100">Book this</a></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>How today works</h2>
+  <p class="sub">You pay once, I build in the open, you approve a live link — not a promise.</p>
+  <div class="steps">
+    <div class="step"><b>STEP 1 · 15 MIN</b><h4>Book &amp; brief</h4><p>Pick a sprint below, pay the flat $100, and send the repo, error, or idea in the form.</p></div>
+    <div class="step"><b>STEP 2 · HOURS 1–8</b><h4>I build</h4><p>You get a progress link within the first hour and a live preview before final delivery.</p></div>
+    <div class="step"><b>STEP 3 · HOUR 12</b><h4>You approve</h4><p>Deployed link + source code handed over. One round of small fixes included.</p></div>
+    <div class="step"><b>STEP 4 · AFTER</b><h4>You launch</h4><p>Keep the code, the demo, and the write-up. Need more? We scope sprint two.</p></div>
+  </div>
+</div></section>
+
+<section id="work"><div class="wrap">
+  <h2>Proof, not promises</h2>
+  <p class="sub">Recent shipped work — every link is public on GitHub.</p>
+  <div class="work">
+    <div class="job"><h4>Kar Communication</h4><p>Unified website + admin on Cloudflare Workers — vinext, Hono, D1 and R2 in production.</p><a href="https://github.com/Seyamalam/karcomm" target="_blank" rel="noopener">github.com/Seyamalam/karcomm →</a></div>
+    <div class="job"><h4>CareNow</h4><p>Family care platform for Bangladesh — Expo React Native, Hono and Cloudflare D1.</p><a href="https://github.com/Seyamalam/CareNow" target="_blank" rel="noopener">github.com/Seyamalam/CareNow →</a></div>
+    <div class="job"><h4>Huntrix Delta — HackFusion Champion 2026</h4><p>Offline-first disaster logistics for when networks and power disappear. Solo build, Expo + Go + gRPC + CRDT.</p><a href="https://github.com/Seyamalam/hackfusion_huntrix" target="_blank" rel="noopener">github.com/Seyamalam/hackfusion_huntrix →</a></div>
+    <div class="job"><h4>bun-scikit &amp; Zodic</h4><p>Open-source developer tools: ML primitives for Bun/TypeScript and a zero-dependency Python validation library on PyPI.</p><a href="https://github.com/Seyamalam" target="_blank" rel="noopener">github.com/Seyamalam →</a></div>
+  </div>
+</div></section>
+
+<section id="order"><div class="wrap">
+  <h2>Book the sprint</h2>
+  <p class="sub">Choose a sprint, add your details, and you will get a payment link plus a start time today. Fields marked * are required.</p>
+  <div class="order">
+    <form id="bookForm" method="POST" action="mailto:seyamalam41@gmail.com" novalidate>
+      <fieldset style="border:0">
+        <legend class="mono" style="color:var(--accent);margin-bottom:18px">YOUR BRIEF</legend>
+        <label for="pkg">Sprint *</label>
+        <select id="pkg" name="package" required autocomplete="off">
+          <option>Bug-Fix Sprint — $100</option>
+          <option>Landing Page in a Day — $100</option>
+          <option>API / Agent Feature Sprint — $100</option>
+        </select>
+        <label for="name">Your name *</label>
+        <input id="name" name="name" type="text" autocomplete="name" required minlength="2" placeholder="e.g. Alex Rahman">
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" autocomplete="email" autocorrect="off" autocapitalize="off" spellcheck="false" required placeholder="you@company.com" aria-describedby="emailHelp">
+        <span id="emailHelp" class="mono" style="color:var(--muted)">Used only to send your payment link and delivery.</span>
+        <label for="brief" style="margin-top:16px">What needs shipping? *</label>
+        <textarea id="brief" name="brief" rows="4" required minlength="20" placeholder="Paste the error, repo link, or describe the page/feature in 2–3 sentences."></textarea>
+        <p id="formMsg" role="status" aria-live="polite" class="mono" style="min-height:20px;color:var(--accent)"></p>
+        <button class="btn" type="submit" id="submitBtn" style="min-height:48px;width:100%">Request payment link — $100</button>
+      </fieldset>
+    </form>
+    <div>
+      <p class="mono" style="color:var(--muted)">TOTAL DUE TODAY</p>
+      <div class="total" id="total">$100</div>
+      <p style="color:var(--muted);font-size:15px;margin-top:10px">Flat fee. No hourly meter. Includes deployment, source code, and one round of small fixes. If I cannot fix it, you do not pay — I will tell you in the first hour.</p>
+      <div style="margin-top:24px;border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--panel)">
+        <p class="mono" style="color:var(--accent);margin-bottom:10px">NEED TO DM ME FIRST?</p>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:14px">Copy this opener and send it with your error or idea.</p>
+        <p id="dmText" style="font-size:14px;border:1px dashed var(--line);padding:14px;border-radius:6px">Hi Seyam — I saw your $100 Ship-It-Today sprint. I need [bug fix / landing page / API feature]: [one sentence]. Repo/error: [link]. Can you ship it today?</p>
+        <button class="btn ghost" type="button" id="copyDm" style="margin-top:14px;min-height:48px">Copy DM opener</button>
+        <span id="copyMsg" role="status" aria-live="polite" class="mono"></span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>Questions</h2>
+  <p class="sub">Straight answers before you pay.</p>
+  <details><summary>What counts as one sprint?</summary><p>One blocking bug, one landing page, or one scoped endpoint/feature. If your request is bigger, I will split it honestly in the first hour and ship the first working slice today.</p></details>
+  <details><summary>How do I pay?</summary><p>After you submit the form, you receive a Stripe / Lemon Squeezy payment link (or Wise/bKash if you prefer). Work starts on payment. Replace the placeholder link in this page with your live link before sharing it publicly.</p></details>
+  <details><summary>What if you cannot fix it?</summary><p>You do not pay. I assess feasibility in the first hour and refund or cancel if the fix is not realistically shippable today.</p></details>
+  <details><summary>Do I own the code?</summary><p>Yes — full source, deployed link, and a short write-up are yours on delivery.</p></details>
+</div></section>
+
+<footer><div class="wrap">
+  <span>Touhidul Alam Seyam · Software Engineer @ Agentic Institute · London / Chattogram</span>
+  <span class="mono"><a href="https://github.com/Seyamalam" target="_blank" rel="noopener">GitHub</a> · <a href="https://seyamalam.vercel.app" target="_blank" rel="noopener">Portfolio</a> · <a href="mailto:seyamalam41@gmail.com">seyamalam41@gmail.com</a></span>
+</div></footer>
+
+<style>
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  input:user-invalid,select:user-invalid,textarea:user-invalid{border-color:#E85D2A}
+  input,select,textarea{min-height:48px;font-size:1rem}
+</style>
+<script>
+  // Countdown to midnight local time
+  function tick(){
+    var now=new Date(), end=new Date(now); end.setHours(23,59,59,999);
+    var s=Math.max(0,Math.floor((end-now)/1000));
+    var h=String(Math.floor(s/3600)).padStart(2,'0'), m=String(Math.floor(s%3600/60)).padStart(2,'0'), sec=String(s%60).padStart(2,'0');
+    document.getElementById('countdown').textContent=h+':'+m+':'+sec;
+  } tick(); setInterval(tick,1000);
+
+  // Offer buttons preselect the package
+  document.querySelectorAll('[data-pick]').forEach(function(b){
+    b.addEventListener('click',function(){ document.getElementById('pkg').value=b.getAttribute('data-pick'); });
+  });
+
+  // Copy DM opener
+  document.getElementById('copyDm').addEventListener('click',function(){
+    var t=document.getElementById('dmText').textContent.trim();
+    navigator.clipboard.writeText(t).then(function(){
+      document.getElementById('copyMsg').textContent=' Copied.';
+    }).catch(function(){ document.getElementById('copyMsg').textContent=' Select the text and copy manually.'; });
+  });
+
+  // Accessible validation: validate on submit, clear on input
+  var form=document.getElementById('bookForm');
+  form.querySelectorAll('input,select,textarea').forEach(function(el){
+    el.addEventListener('input',function(){ el.setCustomValidity(''); });
+  });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var firstBad=null;
+    form.querySelectorAll('[required]').forEach(function(el){
+      if(!el.checkValidity() && !firstBad) firstBad=el;
+    });
+    if(firstBad){
+      document.getElementById('formMsg').textContent='Please complete the highlighted fields.';
+      firstBad.focus(); return;
+    }
+    var btn=document.getElementById('submitBtn'); btn.disabled=true;
+    var pkg=document.getElementById('pkg').value;
+    var name=document.getElementById('name').value.trim();
+    var brief=document.getElementById('brief').value.trim();
+    var subject=encodeURIComponent('Ship It Today booking: '+pkg);
+    var body=encodeURIComponent('Name: '+name+'\nPackage: '+pkg+'\n\nBrief:\n'+brief+'\n\nPlease send my $100 payment link.');
+    document.getElementById('formMsg').textContent='Opening your email app — send it and I will reply with your payment link.';
+    window.location.href='mailto:seyamalam41@gmail.com?subject='+subject+'&body='+body;
+    setTimeout(function(){ btn.disabled=false; },1500);
+  });
+</script>
+</body>
+</html>
+
